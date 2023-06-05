@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>웹툰 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        #container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .add-link {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .add-link button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-link button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>웹툰 목록</h1>
+    <div class="add-link">
+        <button><a href="/insertForm">추가</a></button>
+    </div>
+    <table>
+        <tr>
+            <th>IDX</th>
+            <th>이미지</th>
+            <th>제목</th>
+            <th>삭제</th>
+        </tr>
+        <script>
+            // 서버에서 전달한 데이터
+            var data = [
+                {idx: "@idx0", image: "@image0", title: "@title0"},
+                {idx: "@idx1", image: "@image1", title: "@title1"},
+                {idx: "@idx2", image: "@image2", title: "@title2"},
+                {idx: "@idx3", image: "@image3", title: "@title3"},
+                {idx: "@idx4", image: "@image4", title: "@title4"},
+                {idx: "@idx5", image: "@image5", title: "@title5"},
+                {idx: "@idx6", image: "@image6", title: "@title6"},
+                {idx: "@idx7", image: "@image7", title: "@title7"},
+                {idx: "@idx8", image: "@image8", title: "@title8"},
+                {idx: "@idx9", image: "@image9", title: "@title9"},
+                {idx: "@idx10", image: "@image10", title: "@title10"}
+            ];
+
+            var table = document.querySelector("table");
+
+            for (var i = 0; i < @count; i++) {
+                var item = data[i];
+                var id = item.idx;
+                var imageSrc = item.image;
+                var title = item.title;
+
+                var row = document.createElement("tr");
+                var idCell = document.createElement("td");
+                var imageCell = document.createElement("td");
+                var titleCell = document.createElement("td");
+                var deleteCell = document.createElement("td");
+
+                var img = document.createElement("img");
+                img.src = imageSrc;
+
+                var link = document.createElement("a");
+                link.href = "/read?idx=" + id;
+                link.textContent = title;
+
+                var deleteLink = document.createElement("a");
+                deleteLink.href = "/delete?idx=" + id;
+                deleteLink.textContent = "삭제";
+
+                idCell.textContent = id;
+                imageCell.appendChild(img);
+                titleCell.appendChild(link);
+                deleteCell.appendChild(deleteLink);
+
+                row.appendChild(idCell);
+                row.appendChild(imageCell);
+                row.appendChild(titleCell);
+                row.appendChild(deleteCell);
+
+                table.appendChild(row);
+            }
+        </script>
+    </table>
+</div>
+</body>
+</html>
